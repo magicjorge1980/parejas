@@ -4,10 +4,13 @@ import cors from 'cors'
 import 'dotenv/config'
 
 import userRoutes from './routes/userRoutes.js'
+import cardRoutes from './routes/cardRoutes.js'
 
 const { MONGODB_URL, PORT } = process.env
 
-mongoose.connect(MONGODB_URL).then(()=>{
+mongoose
+  .connect(MONGODB_URL)
+  .then(() => {
     const api = express()
 
     api.use(cors())
@@ -15,5 +18,10 @@ mongoose.connect(MONGODB_URL).then(()=>{
 
     api.use('/api/users', userRoutes)
 
-    api.listen(PORT, () => console.log(`Servidor ejecuntándose en puerto ${PORT}`))
-}).catch(error => console.error(error))
+    api.use('/api/cards', cardRoutes)
+
+    api.listen(PORT, () =>
+      console.log(`Servidor ejecuntándose en puerto ${PORT}`)
+    )
+  })
+  .catch((error) => console.error(error))

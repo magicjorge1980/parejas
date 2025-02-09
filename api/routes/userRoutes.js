@@ -1,7 +1,7 @@
 import express from 'express'
 
 import registerUserHandler from '../handlers/registerUserHandler.js'
-import loginUserHandler from '../handlers/loginUserHandler.js'
+import authUserHandler from '../handlers/authUserHandler.js'
 
 const router = express.Router()
 
@@ -11,6 +11,6 @@ router.get('/', (req, res) => {
 
 router.post('/register', registerUserHandler)
 
-router.post('/login', loginUserHandler)
+router.post('/login', authUserHandler)
 
 export default router

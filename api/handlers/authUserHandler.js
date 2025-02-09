@@ -1,4 +1,4 @@
-import { loginUser } from '../logic/loginUser.js'
+import { authUser } from '../logic/authUser.js'
 
 import jwt from '../utils/jsonwebtoken-promised.js'
 
@@ -8,7 +8,7 @@ export default async (req, res) => {
   const { email, password } = req.body
 
   try {
-    const { userId, username, role } = await loginUser(email, password)
+    const { userId, username, role } = await authUser(email, password)
 
     const token = await jwt.sign({ sub: userId }, JWT_SECRET, {
       expiresIn: '1d',

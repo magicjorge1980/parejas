@@ -1,6 +1,6 @@
 import { User } from '../data/index.js'
 import bcrypt from 'bcryptjs'
-export const loginUser = async (email, password) => {
+export const authUser = async (email, password) => {
   try {
     const user = await User.findOne({ email })
 

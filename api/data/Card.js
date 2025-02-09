@@ -1,14 +1,14 @@
 import { Schema, model } from 'mongoose'
 
 const cardSchema = new Schema({
-  CardTitle: {
+  title: {
     type: String,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
     required: true,
-    unique: true,
   },
 })
 
