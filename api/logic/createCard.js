@@ -10,6 +10,7 @@ export const createCard = async (title, description) => {
     const newCard = {
       title,
       description,
+      createdAt: new Date(),
     }
 
     await Card.create(newCard)
