@@ -5,7 +5,7 @@ export const registerUser = async (name, username, email, password) => {
     const user = await User.findOne({ email })
 
     if (user) {
-      return res.status(400).send('El usuario ya existe')
+      throw new Error('El email ya está registrado')
     }
 
     const passHash = await bcrypt.hash(password, 10)
@@ -20,7 +20,6 @@ export const registerUser = async (name, username, email, password) => {
 
     await User.create(newUser)
   } catch (error) {
-    console.error(error)
-    res.status(500).send('Error al registrar el usuario')
+    throw new Error(error.message || 'Error al registrar el usuario')
   }
 }

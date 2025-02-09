@@ -8,6 +8,6 @@ export default async (req, res) => {
     res.status(201).send('Usuario registrado correctamente')
   } catch (error) {
     console.error(error)
-    res.status(500).send('Error al registrar el usuario')
+    res.status(400).json({ message: error.message })
   }
 }
