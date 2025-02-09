@@ -1,0 +1,27 @@
+# Ignorar archivos temporales
+*.tmp
+*.log
+
+# Ignorar archivos de entorno
+.env
+
+# Ignorar directorios de dependencias
+node_modules/
+
+# Ignorar archivos de configuración específicos del IDE
+.vscode/
+
+# Ignorar archivos generados por macOS
+.DS_Store
+
+# Ignorar archivos de respaldo de macOS
+._*
+
+# Ignorar archivos de caché de macOS
+/Library/Caches/
+
+# Ignorar archivos de configuración de macOS
+/Library/Preferences/
+
+# Ignorar archivos de volcado de memoria de macOS
+*.dSYM
