@@ -1,0 +1,111 @@
+.card {
+  width: 300px;
+  height: 450px;
+  border-radius: 20px; /* Esquinas más redondeadas */
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Ajusta los valores según sea necesario */
+  background: linear-gradient(180deg, #ffd700 50%, #000000 50%);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  position: relative;
+  margin: 20px;
+  border: 1px solid #ffd700; /* Borde sutil */
+}
+
+.header {
+  padding: 20px;
+  background-color: #ffd700;
+  color: black;
+  border-bottom: 1px solid #ffd700; /* Borde inferior */
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.content {
+  padding: 20px;
+  background-color: #000000;
+  color: #ffd700; /* Amarillo un poco más oscuro */
+}
+
+.content p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+
+hr {
+  border: 1px solid #ffd700;
+  margin: 10px 0;
+}
+
+.btn-usar {
+  border: none;
+  border-radius: 10px;
+  margin: 0;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #72e08e;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 6vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-usar:hover {
+  background-color: #13cd6a;
+}
+
+.btn-usar:disabled {
+  background-color: #808080;
+  color: white;
+  cursor: not-allowed;
+}
+
+.fecha {
+  position: absolute;
+  bottom: 30px; /* Ajusta la posición para que no se solape con el footer */
+  left: 50%;
+  transform: translateX(-50%);
+  color: wheat;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.fav {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
