@@ -10,10 +10,10 @@ export default async (req, res) => {
   try {
     const { userId, username, role } = await loginUser(email, password)
 
-    const token = await jwt.sign({ sub: userId, username, role }, JWT_SECRET, {
+    const token = await jwt.sign({ sub: userId }, JWT_SECRET, {
       expiresIn: '1d',
     })
-    res.json({ token })
+    res.json({ token, username, role })
   } catch (error) {
     console.error(error)
     res.status(400).json({ message: error.message })
