@@ -1,4 +1,4 @@
-export const registerUser = async (name, username, email, password, couple) => {
+export const registerUser = async (username, email, password, couple) => {
   try {
     const response = await fetch('http://localhost:8080/api/users/register', {
       method: 'POST',
@@ -6,7 +6,6 @@ export const registerUser = async (name, username, email, password, couple) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name,
         username,
         email,
         password,

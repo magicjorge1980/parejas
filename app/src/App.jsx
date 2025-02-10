@@ -1,12 +1,12 @@
-// import Card from './components/Card/Card'
-import Register from './pages/Register.jsx'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Register from './pages/register'
 function App() {
   return (
-    <>
-      {/* <Card titulo={'Carta 1'} descripcion={'Descripción de la carta 1'} /> */}
-      <Register />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   )
 }
 

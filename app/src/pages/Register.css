@@ -1,0 +1,83 @@
+body {
+    background-color: black; /* Fondo negro */
+    color: yellow; /* Texto amarillo */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid yellow; /* Borde amarillo */
+    background-color: black; /* Fondo negro */
+    color: yellow; /* Texto amarillo */
+    box-sizing: border-box;
+  }
+  
+  .container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form {
+    padding: 20px;
+    border: 2px solid yellow; /* Borde amarillo */
+    border-radius: 10px;
+    box-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 30px yellow; /* Efecto de brillo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    align-items: center;
+    background-color: black; /* Fondo negro */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+    color: yellow; /* Texto amarillo */
+    justify-content: center;
+    width: 80%;
+  }
+  
+  .submit-button {
+    margin-top: 3vh;
+    background-color: yellow; /* Fondo amarillo */
+    color: black; /* Texto negro */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .submit-button:hover {
+    background-color: #ffd700; /* Amarillo más claro al pasar el ratón */
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.875rem;
+    margin: 0 auto;
+  }
+  
+  /* Media query para pantallas grandes */
+  @media (min-width: 768px) {
+    input {
+      width: 70%; /* Reduce el ancho en pantallas grandes */
+    }
+  
+    .form {
+      width: 60%; /* Ajusta el ancho total del formulario */
+    }
+  }
+  

@@ -1,6 +1,6 @@
 import { User } from '../data/index.js'
 import bcrypt from 'bcryptjs'
-export const registerUser = async (name, username, email, couple, password) => {
+export const registerUser = async (username, email, couple, password) => {
   try {
     const user = await User.findOne({ email })
 
@@ -11,7 +11,6 @@ export const registerUser = async (name, username, email, couple, password) => {
     const passHash = await bcrypt.hash(password, 10)
 
     const newUser = {
-      name,
       username,
       email,
       couple,

@@ -1,83 +1,120 @@
-import { registerUser } from '../logic/registerUser'
-import useForm from '../hooks/useForm'
+import './Register.css'
 
-export default function Register() {
-  const validate = (values) => {
-    const errors = {}
-    if (!values.name) errors.name = 'Nombre es requerido'
-    if (!values.username) errors.username = 'Nombre de usuario es requerido'
-    if (!values.email) errors.email = 'Correo electrónico es requerido'
-    if (!values.password) errors.password = 'Contraseña es requerida'
-    // Agrega más validaciones según sea necesario
-    return errors
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import { useState } from 'react'
+import { registerUser } from '../logic/registerUser'
+
+import { Link } from 'react-router-dom'
+function Register() {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const initialValues = {
+    email: '',
+    password: '',
+    username: '',
+    couple: '',
   }
 
-  const { values, errors, handleChange, handleSubmit } = useForm(
-    {
-      name: '',
-      username: '',
-      email: '',
-      password: '',
-      couple: '',
-    },
-    async (formValues) => {
-      await registerUser(
-        formValues.name,
-        formValues.username,
-        formValues.email,
-        formValues.password,
-        formValues.couple
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('Nombre es obligatorio'),
+    email: Yup.string()
+      .email('Email Inválido')
+      .required('Email es obligatorio'),
+    couple: Yup.string()
+      .email('Email de pareja inválido')
+      .required('Email de pareja es obligatorio'),
+    password: Yup.string()
+      .min(6, 'La contraseña debe tener mínimo 6 caracteres')
+      .required('Password es obligatoria'),
+  })
+
+  const handleOnSubmit = async (values, { setSubmitting }) => {
+    setLoading(true)
+    setError('')
+
+    console.log(values)
+
+    try {
+      const user = await registerUser(
+        values.email,
+        values.password,
+        values.username,
+        values.couple
       )
-      // Puedes agregar lógica adicional aquí, como redirigir al usuario o mostrar un mensaje de éxito
-    },
-    validate
-  )
+
+      sessionStorage.setItem('userName', values.username)
+      sessionStorage.setItem('email', values.email)
+
+      //   const usuarios = await getUsuarios()
+      //   const foundUser = usuarios.find((usuario) => usuario.id === user.uid)
+
+      //   if (!foundUser) {
+      //     setRole(foundUser.role)
+      //     setUserName(foundUser.name)
+      //     sessionStorage.setItem('userName', foundUser.name)
+      //     sessionStorage.setItem('email', user.email)
+      //   } else {
+      //     setError('Usuario ya registrado.')
+      //   }
+
+      console.log('User registered:', user)
+    } catch (error) {
+      setError('Error al registrar el usuario.')
+      console.error('Error al registrar el usuario:', error)
+    } finally {
+      setLoading(false)
+      setSubmitting(false)
+    }
+  }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={values.name}
-          onChange={handleChange}
-        />
-        {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
-        <input
-          type="text"
-          name="username"
-          placeholder="Nombre de usuario"
-          value={values.username}
-          onChange={handleChange}
-        />
-        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo electrónico"
-          value={values.email}
-          onChange={handleChange}
-        />
-        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={values.password}
-          onChange={handleChange}
-        />
-        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
-        <input
-          type="text"
-          name="couple"
-          placeholder="Pareja"
-          value={values.couple}
-          onChange={handleChange}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-      {errors.submit && <p style={{ color: 'red' }}>{errors.submit}</p>}
-    </>
+    <div className="container">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleOnSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="form">
+            <div className="form-group">
+              <h1>Couples</h1>
+              <label htmlFor="username">Nombre de usuario</label>
+              <Field type="text" id="username" name="username" />
+              <ErrorMessage name="username" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <Field type="email" id="email" name="email" />
+              <ErrorMessage name="email" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="couple">Email de tu pareja</label>
+              <Field type="email" id="couple" name="couple" />
+              <ErrorMessage name="couple" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <Field type="password" id="password" name="password" />
+              <ErrorMessage name="password" component="div" className="error" />
+            </div>
+            {error && <p className="error">{error}</p>}
+            <button
+              className="submit-button"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Cargando...' : 'Registrar'}
+            </button>
+            <Link to="/">
+              <p>Ya tengo cuenta, Iniciar sesión</p>
+            </Link>
+          </Form>
+        )}
+      </Formik>
+    </div>
   )
 }
+
+export default Register
