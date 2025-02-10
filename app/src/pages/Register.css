@@ -15,6 +15,7 @@ body {
     background-color: black; /* Fondo negro */
     color: yellow; /* Texto amarillo */
     box-sizing: border-box;
+    margin-top: 10px;
   }
   
   .container {
@@ -22,6 +23,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
   }
   
   .form {
