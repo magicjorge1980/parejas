@@ -3,10 +3,17 @@ import * as Yup from 'yup'
 import { loginUser } from '../logic/loginUser'
 import { useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { useUser } from '../providers/UserContext'
+
 function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const { setUser, setRole, setUserName } = useUser()
+
+  const navigate = useNavigate()
 
   const initialValues = {
     email: '',
@@ -29,9 +36,15 @@ function LoginForm() {
     try {
       const foundUser = await loginUser(values.email, values.password)
 
+      console.log('User logged in:', foundUser)
+
+      setUser(foundUser)
+
       if (foundUser) {
         sessionStorage.setItem('token', foundUser.token)
         sessionStorage.setItem('username', foundUser.username)
+
+        navigate('/home')
       } else {
         setError('Usuario no encontrado.')
       }
@@ -62,7 +75,7 @@ function LoginForm() {
         {({ isSubmitting }) => (
           <Form className="form">
             <div className="form-group">
-              <h1>Servd</h1>
+              <h1>Couples</h1>
               <label htmlFor="email">Email</label>
               <Field type="email" id="email" name="email" />
               <ErrorMessage name="email" component="div" className="error" />

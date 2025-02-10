@@ -3,7 +3,7 @@ import 'dotenv/config'
 
 const { JWT_SECRET } = process.env
 
-export const authRequired = async (req, res, next) => {
+const authRequired = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization
 
@@ -22,3 +22,5 @@ export const authRequired = async (req, res, next) => {
     return res.status(401).json({ message: 'Token inválido' })
   }
 }
+
+export default authRequired

@@ -1,7 +1,7 @@
 import express from 'express'
 
 import createCardHandler from '../handlers/createCardHandler.js'
-import { authRequired } from '../middlewares/validateToken.js'
+import authRequired from '../middlewares/validateToken.js'
 import { isAdmin } from '../middlewares/isAdmin.js'
 import deleteCardHandler from '../handlers/deleteCardHandler'
 
